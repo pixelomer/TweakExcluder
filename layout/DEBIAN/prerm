@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -f "/Library/MobileSubstrate/DynamicLibraries/TweakExcluder.dylib" "/Library/MobileSubstrate/DynamicLibraries/TweakExcluder.plist"
+mv "/Library/MobileSubstrate/DynamicLibraries/ TweakExcluder.dylib" "/Library/MobileSubstrate/DynamicLibraries/TweakExcluder.dylib"
+mv "/Library/MobileSubstrate/DynamicLibraries/ TweakExcluder.plist" "/Library/MobileSubstrate/DynamicLibraries/TweakExcluder.plist"
