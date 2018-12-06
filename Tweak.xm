@@ -9,11 +9,12 @@
 static NSArray<NSString*> *frameworkBIDs;
 
 %hookf(void *, dlopen, const char *path, int mode) {
+	if (path == NULL) return %orig;
 	@autoreleasepool {
 		NSString *nspath = @(path);
 		NSString *bid = NSBundle.mainBundle.bundleIdentifier;
 		NSString *tweak = [nspath lastPathComponent];
-		if (bid &&
+		if (path != NULL && bid &&
 			([nspath hasPrefix:@"/usr/lib/tweaks"] || [nspath hasPrefix:@"/Library/MobileSubstrate/DynamicLibraries"]) &&
 			[tweak hasSuffix:@".dylib"])
 		{
