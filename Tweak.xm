@@ -1,4 +1,10 @@
 #import <Foundation/Foundation.h>
+#import "TweakConfigurator.h"
+#if DEBUG
+#define NSLog(args...) NSLog(@"[TweakConfigurator] "args)
+#else
+#define NSLog(...); /* */
+#endif
 
 static NSArray<NSString*> *frameworkBIDs;
 
@@ -11,14 +17,21 @@ static NSArray<NSString*> *frameworkBIDs;
 			([nspath hasPrefix:@"/usr/lib/tweaks"] || [nspath hasPrefix:@"/Library/MobileSubstrate/DynamicLibraries"]) &&
 			[tweak hasSuffix:@".dylib"])
 		{
-			NSDictionary *tweakConfig = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@%@%@", @"/Library/MobileSubstrate/UserConfigs/", [tweak substringToIndex:([tweak length] - [@".dylib" length])], @".plist"]];
-			NSLog(@"%@: %@", tweak, tweakConfig);
-			if (tweakConfig) {
-				id blacklist = [tweakConfig objectForKey:@"AppBlacklist"];
-				NSLog(@"Blacklist: %@", blacklist);
-				if (blacklist && [blacklist isKindOfClass:[NSArray class]] && [(NSArray*)blacklist count] > 0) {
-					if ([(NSArray*)blacklist containsObject:bid]) return NULL;
-					for (NSString *bbid in (NSArray*)blacklist) if ([frameworkBIDs containsObject:bbid]) return NULL;
+			NSDictionary *blacklist = [NSDictionary dictionaryWithContentsOfFile:[
+					@"/var/mobile/Library/Preferences" stringByAppendingPathComponent:[
+						@"TweakConfig-" stringByAppendingString:[
+							[
+								[tweak stringByDeletingPathExtension] stringByAppendingString:@"-Blacklist"
+							] stringByAppendingPathExtension:@"plist"
+						]
+					]
+				]
+			];
+			if (blacklist) {
+				for (NSString *key in blacklist) {
+					id kenabled = [blacklist objectForKey:key];
+					if (!kenabled || ![kenabled isKindOfClass:[NSNumber class]] || ![kenabled boolValue]) continue;
+					if ([bid isEqualToString:key] || [frameworkBIDs containsObject:key]) return NULL;
 				}
 			}
 		}

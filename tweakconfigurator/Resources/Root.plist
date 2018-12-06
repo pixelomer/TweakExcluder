@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+        <dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>label</key>
+            <string>Tweak Configurator</string>
+            <key>footerText</key>
+            <string>Made by PixelOmer</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+            <key>label</key>
+            <string>Tweak</string>
+            <key>valuesDataSource</key>
+            <string>tweakList:</string>
+            <key>titlesDataSource</key>
+            <string>tweakList:</string>
+            <key>get</key>
+            <string>getSelectedItem:</string>
+            <key>set</key>
+            <string>setSelectedItem:forSpecifier:</string>
+            <key>detail</key>
+            <string>PSListItemsController</string>
+		</dict>
+        <dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>bundle</key>
+			<string>AppList</string>
+			<key>isController</key>
+			<string>1</string>
+			<key>label</key>
+			<string>Blacklisted Apps</string>
+			<key>ALAllowsSelection</key>
+			<string>1</string>
+			<key>ALSettingsKeyPrefix</key>
+			<string></string>
+			<key>ALSettingsDefaultValue</key>
+			<string>0</string>
+			<key>ALSingleEnabledMode</key>
+			<false/>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>TweakConfigurator</string>
+</dict>
+</plist>
