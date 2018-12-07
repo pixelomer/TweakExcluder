@@ -7,7 +7,7 @@ export TARGET ARCHS
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = TweakConfigurator
-TweakConfigurator_FILES = Tweak.xm
+TweakConfigurator_FILES = Tweak.xm TweakConfiguratorShared/TweakConfigurator.m
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += tweakconfigurator

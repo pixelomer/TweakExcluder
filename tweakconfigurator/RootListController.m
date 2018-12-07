@@ -13,8 +13,14 @@
 - (NSArray *)specifiers {
 	if (!_specifiers) {
 		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
-		_blacklistLinkCell = [_specifiers lastObject];
-		[_blacklistLinkCell setProperty:@NO forKey:PSEnabledKey];
+		// Hardcoded count because if something is modified, things can go wrong
+		if (!_specifiers || [_specifiers count] != 5) {
+			_specifiers = [[self loadSpecifiersFromPlistName:@"Error" target:self] retain];
+		}
+		else {
+			_blacklistLinkCell = [_specifiers objectAtIndex:3];
+			_blacklistSBSwitch = [_specifiers objectAtIndex:4];
+		}
 	}
 	return _specifiers;
 }
@@ -29,22 +35,27 @@
 	if (newValue && ![newValue isEqualToString:@""]) {
 		[_blacklistLinkCell setProperty:@YES forKey:PSEnabledKey];
 		[_blacklistLinkCell
-			setProperty:[
-				@"/var/mobile/Library/Preferences" stringByAppendingPathComponent:[
-					@"TweakConfig-" stringByAppendingString:[
-						[
-							[newValue stringByDeletingPathExtension] stringByAppendingString:@"-Blacklist"
-						] stringByAppendingPathExtension:@"plist"
-					]
-				]
-			]
+			setProperty:[TweakConfigurator getPreferencePathForTweakNamed:newValue withSuffix:TWEAKCFG_BLACKLIST]
 			forKey:@"ALSettingsPath"
 		];
-		NSLog(@"%@", [_blacklistLinkCell propertyForKey:@"ALSettingsPath"]);
+		[_blacklistSBSwitch setProperty:@YES forKey:PSEnabledKey];
+		[_blacklistSBSwitch
+			setProperty:[TweakConfigurator getPreferenceFilenameForTweakNamed:newValue withSuffix:TWEAKCFG_BLACKLIST]
+			forKey:PSDefaultsKey
+		];
 	}
-	else [_blacklistLinkCell setProperty:@NO forKey:PSEnabledKey];
+	else {
+		[_blacklistLinkCell setProperty:@NO forKey:PSEnabledKey];
+		[_blacklistSBSwitch setProperty:@NO forKey:PSEnabledKey];
+		[_blacklistSBSwitch removePropertyForKey:PSDefaultsKey];
+		[_blacklistSBSwitch setProperty:@NO forKey:PSDefaultValueKey];
+	}
 	_selectedItem = newValue;
 	[self reload];
+}
+
+- (void)respring {
+	popen("killall SpringBoard", "r");
 }
 
 - (NSArray *)tweakList:(PSSpecifier *)specifier {

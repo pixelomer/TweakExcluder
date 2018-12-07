@@ -8,9 +8,7 @@
             <key>cell</key>
             <string>PSGroupCell</string>
             <key>label</key>
-            <string>Tweak Configurator</string>
-            <key>footerText</key>
-            <string>Made by PixelOmer</string>
+            <string>Select Tweak</string>
         </dict>
 		<dict>
 			<key>cell</key>
@@ -28,6 +26,14 @@
             <key>detail</key>
             <string>PSListItemsController</string>
 		</dict>
+		<dict>
+            <key>cell</key>
+            <string>PSGroupCell</string>
+            <key>label</key>
+            <string>Options</string>
+            <key>footerText</key>
+            <string>Made by PixelOmer</string>
+        </dict>
         <dict>
 			<key>cell</key>
 			<string>PSLinkCell</string>
@@ -43,9 +49,23 @@
 			<string></string>
 			<key>ALSettingsDefaultValue</key>
 			<string>0</string>
+			<key>enabled</key>
+			<false/>
 			<key>ALSingleEnabledMode</key>
 			<false/>
 		</dict>
+		<dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>label</key>
+            <string>Blacklist SpringBoard</string>
+            <key>default</key>
+			<false/>
+			<key>enabled</key>
+			<false/>
+			<key>key</key>
+			<string>com.apple.springboard</string>
+        </dict>
 	</array>
 	<key>title</key>
 	<string>TweakConfigurator</string>

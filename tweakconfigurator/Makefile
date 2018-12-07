@@ -1,7 +1,7 @@
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = TweakConfigurator
-TweakConfigurator_FILES = RootListController.m
+TweakConfigurator_FILES = RootListController.m ../TweakConfiguratorShared/TweakConfigurator.m
 TweakConfigurator_INSTALL_PATH = /Library/PreferenceBundles
 TweakConfigurator_FRAMEWORKS = UIKit
 TweakConfigurator_PRIVATE_FRAMEWORKS = Preferences

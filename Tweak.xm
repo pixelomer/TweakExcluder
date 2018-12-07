@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "TweakConfigurator.h"
+#import "TweakConfiguratorShared/TweakConfigurator.h"
 #if DEBUG
 #define NSLog(args...) NSLog(@"[TweakConfigurator] "args)
 #else
@@ -18,16 +18,7 @@ static NSArray<NSString*> *frameworkBIDs;
 			([nspath hasPrefix:@"/usr/lib/tweaks"] || [nspath hasPrefix:@"/Library/MobileSubstrate/DynamicLibraries"]) &&
 			[tweak hasSuffix:@".dylib"])
 		{
-			NSDictionary *blacklist = [NSDictionary dictionaryWithContentsOfFile:[
-					@"/var/mobile/Library/Preferences" stringByAppendingPathComponent:[
-						@"TweakConfig-" stringByAppendingString:[
-							[
-								[tweak stringByDeletingPathExtension] stringByAppendingString:@"-Blacklist"
-							] stringByAppendingPathExtension:@"plist"
-						]
-					]
-				]
-			];
+			NSDictionary *blacklist = [NSDictionary dictionaryWithContentsOfFile:[TweakConfigurator getPreferencePathForTweakNamed:tweak withSuffix:TWEAKCFG_BLACKLIST]];
 			if (blacklist) {
 				for (NSString *key in blacklist) {
 					id kenabled = [blacklist objectForKey:key];
