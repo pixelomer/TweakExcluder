@@ -14,12 +14,13 @@
 	if (!_specifiers) {
 		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
 		// Hardcoded count because if something is modified, things can go wrong
-		if (!_specifiers || [_specifiers count] != 5) {
+		if (!_specifiers || [_specifiers count] != 6) {
 			_specifiers = [[self loadSpecifiersFromPlistName:@"Error" target:self] retain];
 		}
 		else {
 			_blacklistLinkCell = [_specifiers objectAtIndex:3];
-			_blacklistSBSwitch = [_specifiers objectAtIndex:4];
+			_whitelistSwitch = [_specifiers objectAtIndex:4];
+			_blacklistSBSwitch = [_specifiers objectAtIndex:5];
 		}
 	}
 	return _specifiers;
@@ -43,19 +44,23 @@
 			setProperty:[TweakConfigurator getPreferenceFilenameForTweakNamed:newValue withSuffix:TWEAKCFG_BLACKLIST]
 			forKey:PSDefaultsKey
 		];
+		[_whitelistSwitch setProperty:@YES forKey:PSEnabledKey];
+		[_whitelistSwitch
+			setProperty:[TweakConfigurator getPreferenceFilenameForTweakNamed:newValue withSuffix:TWEAKCFG_BLACKLIST]
+			forKey:PSDefaultsKey
+		];
 	}
 	else {
 		[_blacklistLinkCell setProperty:@NO forKey:PSEnabledKey];
 		[_blacklistSBSwitch setProperty:@NO forKey:PSEnabledKey];
 		[_blacklistSBSwitch removePropertyForKey:PSDefaultsKey];
 		[_blacklistSBSwitch setProperty:@NO forKey:PSDefaultValueKey];
+		[_whitelistSwitch setProperty:@NO forKey:PSEnabledKey];
+		[_whitelistSwitch removePropertyForKey:PSDefaultsKey];
+		[_whitelistSwitch setProperty:@NO forKey:PSDefaultValueKey];
 	}
 	_selectedItem = newValue;
 	[self reload];
-}
-
-- (void)respring {
-	popen("killall SpringBoard", "r");
 }
 
 - (NSArray *)tweakList:(PSSpecifier *)specifier {

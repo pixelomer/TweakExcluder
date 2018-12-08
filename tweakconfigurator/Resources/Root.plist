@@ -30,7 +30,7 @@
             <key>cell</key>
             <string>PSGroupCell</string>
             <key>label</key>
-            <string>Options</string>
+            <string>App Blacklist / Whitelist</string>
             <key>footerText</key>
             <string>Made by PixelOmer</string>
         </dict>
@@ -42,7 +42,7 @@
 			<key>isController</key>
 			<string>1</string>
 			<key>label</key>
-			<string>Blacklisted Apps</string>
+			<string>Apps</string>
 			<key>ALAllowsSelection</key>
 			<string>1</string>
 			<key>ALSettingsKeyPrefix</key>
@@ -58,7 +58,19 @@
             <key>cell</key>
             <string>PSSwitchCell</string>
             <key>label</key>
-            <string>Blacklist SpringBoard</string>
+            <string>Use Whitelist</string>
+            <key>default</key>
+			<false/>
+			<key>enabled</key>
+			<false/>
+			<key>key</key>
+			<string>TweakConfig-UseWhitelist</string>
+        </dict>
+		<dict>
+            <key>cell</key>
+            <string>PSSwitchCell</string>
+            <key>label</key>
+            <string>Include SpringBoard</string>
             <key>default</key>
 			<false/>
 			<key>enabled</key>

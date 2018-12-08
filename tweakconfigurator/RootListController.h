@@ -7,6 +7,7 @@
     NSString *_selectedItem;
     PSSpecifier *_blacklistLinkCell;
     PSSpecifier *_blacklistSBSwitch;
+    PSSpecifier *_whitelistSwitch;
 }
 
 @end

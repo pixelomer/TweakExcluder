@@ -6,8 +6,6 @@
 #define NSLog(...); /* */
 #endif
 
-static NSArray<NSString*> *frameworkBIDs;
-
 %hookf(void *, dlopen, const char *path, int mode) {
 	if (path == NULL) return %orig;
 	@autoreleasepool {
@@ -20,25 +18,13 @@ static NSArray<NSString*> *frameworkBIDs;
 		{
 			NSDictionary *blacklist = [NSDictionary dictionaryWithContentsOfFile:[TweakConfigurator getPreferencePathForTweakNamed:tweak withSuffix:TWEAKCFG_BLACKLIST]];
 			if (blacklist) {
-				for (NSString *key in blacklist) {
-					id kenabled = [blacklist objectForKey:key];
-					if (!kenabled || ![kenabled isKindOfClass:[NSNumber class]] || ![kenabled boolValue]) continue;
-					if ([bid isEqualToString:key] || [frameworkBIDs containsObject:key]) return NULL;
-				}
+				id kwhitelist = [blacklist objectForKey:kTweakConfigWhitelist];
+				bool usingWhitelist = (kwhitelist && [kwhitelist isKindOfClass:[NSNumber class]] && [kwhitelist boolValue]);
+				id item = [blacklist objectForKey:bid];
+				if (!usingWhitelist && (item && [item isKindOfClass:[NSNumber class]] && [item boolValue])) return NULL;
+				else if (usingWhitelist && (!item || ([item isKindOfClass:[NSNumber class]] && ![item boolValue]))) return NULL;
 			}
 		}
 	}
 	return %orig;
-}
-
-%ctor {
-	NSMutableArray<NSString*> *mutableBIDs = [[NSMutableArray alloc] init];
-	@autoreleasepool {
-		NSArray<NSBundle*> *bundles = [NSBundle allFrameworks];
-		for (NSBundle *bundle in bundles) {
-			NSString *bid = [bundle bundleIdentifier];
-			if (bid) [mutableBIDs addObject:bid];
-		}
-	}
-	frameworkBIDs = [mutableBIDs copy];
 }
