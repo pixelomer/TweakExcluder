@@ -1,6 +1,7 @@
 # TweakConfigurator
 
-This is a tweak that lets you configure the injection process of tweaks. The settings for the tweak can be found in the Preferences app.
+This is a tweak that lets you configure the injection process of tweaks. The settings for the tweak can be found in the Preferences app.  
+**Warning:** Do not attempt to install this tweak on a device running anything lower than iOS 11, it will cause a respring loop!
 
 ### TODO
 

@@ -5,6 +5,7 @@ Version: 0.2.3
 Architecture: iphoneos-arm
 Description: Configure tweaks yourself!
   Allows you to blacklist specific apps for specific tweaks. More things to configure soon.
+  Requires iOS 11 or higher.
 Maintainer: PixelOmer
 Author: PixelOmer
 Section: Tweaks
