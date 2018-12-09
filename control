@@ -1,6 +1,6 @@
 Package: com.pixelomer.tweakexcluder
 Name: TweakConfigurator
-Depends: mobilesubstrate
+Depends: mobilesubstrate, preferenceloader
 Version: 0.2.3
 Architecture: iphoneos-arm
 Description: Configure tweaks yourself!

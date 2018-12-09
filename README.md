@@ -9,3 +9,4 @@ This is a tweak that lets you configure the injection process of tweaks. The set
 - [x] Switch to disable tweaks in SpringBoard
 - [x] Option to whitelist instead of blacklist
 - [ ] Ability to inject tweaks into unsupported apps
+- [ ] Support for iOS 6.0 and higher (currently \>iOS 11.0)
