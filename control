@@ -1,11 +1,13 @@
 Package: com.pixelomer.tweakexcluder
 Name: TweakConfigurator
 Depends: mobilesubstrate, preferenceloader, firmware (>=11.0)
-Version: 0.2.3
+Version: 0.3
 Architecture: iphoneos-arm
 Description: Configure tweaks yourself!
-  Allows you to blacklist specific apps for specific tweaks. More things to configure soon.
-  Requires iOS 11 or higher.
+  Features:
+  - You can choose to not load specific tweaks in specific apps.
+  - You can completely disable tweaks in specified apps.
+  Requires iOS 11 or higher. Works with both Substrate and Substitue
 Maintainer: PixelOmer
 Author: PixelOmer
 Section: Tweaks
