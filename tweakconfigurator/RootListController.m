@@ -14,13 +14,13 @@
 	if (!_specifiers) {
 		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
 		// Hardcoded count because if something is modified, things can go wrong
-		if (!_specifiers || [_specifiers count] != 6) {
+		if (!_specifiers || [_specifiers count] != 9) {
 			_specifiers = [[self loadSpecifiersFromPlistName:@"Error" target:self] retain];
 		}
 		else {
-			_blacklistLinkCell = [_specifiers objectAtIndex:3];
-			_whitelistSwitch = [_specifiers objectAtIndex:4];
-			_blacklistSBSwitch = [_specifiers objectAtIndex:5];
+			_blacklistLinkCell = [_specifiers objectAtIndex:5];
+			_whitelistSwitch = [_specifiers objectAtIndex:6];
+			_blacklistSBSwitch = [_specifiers objectAtIndex:7];
 		}
 	}
 	return _specifiers;
