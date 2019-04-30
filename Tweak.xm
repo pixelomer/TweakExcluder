@@ -9,7 +9,8 @@
 static NSDictionary *globalBlacklist;
 
 %hookf(void *, dlopen, const char *path, int mode) {
-	if (path == NULL) return %orig;
+#define return(value) { void *val = value; NSLog(@"dlopen(%s, %d) -> %s", path, mode, val ? "not null" : "null"); return val; }
+	if (path == NULL) return(%orig);
 	@autoreleasepool {
 		NSString *bid = NSBundle.mainBundle.bundleIdentifier;
 		NSString *nspath = @(path);
@@ -20,19 +21,20 @@ static NSDictionary *globalBlacklist;
 		{
 			if (globalBlacklist && bid) {
 				id obj = [globalBlacklist objectForKey:bid];
-				if (obj && [obj isKindOfClass:[NSNumber class]] && [obj boolValue]) return NULL;
+				if (obj && [obj isKindOfClass:[NSNumber class]] && [obj boolValue]) return(NULL);
 			}
 			NSDictionary *blacklist = [NSDictionary dictionaryWithContentsOfFile:[TweakConfigurator getPreferencePathForTweakNamed:tweak withSuffix:TWEAKCFG_BLACKLIST]];
 			if (blacklist) {
 				id kwhitelist = [blacklist objectForKey:kTweakConfigWhitelist];
 				bool usingWhitelist = (kwhitelist && [kwhitelist isKindOfClass:[NSNumber class]] && [kwhitelist boolValue]);
 				id item = [blacklist objectForKey:bid];
-				if (!usingWhitelist && (item && [item isKindOfClass:[NSNumber class]] && [item boolValue])) return NULL;
-				else if (usingWhitelist && (!item || ([item isKindOfClass:[NSNumber class]] && ![item boolValue]))) return NULL;
+				if (!usingWhitelist && (item && [item isKindOfClass:[NSNumber class]] && [item boolValue])) { return(NULL); }
+				else if (usingWhitelist && (!item || ([item isKindOfClass:[NSNumber class]] && ![item boolValue]))) return(NULL);
 			}
 		}
 	}
-	return %orig;
+	return(%orig);
+#undef return
 }
 
 %ctor {
