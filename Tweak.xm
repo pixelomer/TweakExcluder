@@ -16,7 +16,7 @@ static NSDictionary *globalBlacklist;
 		NSString *nspath = @(path);
 		NSString *tweak = [nspath lastPathComponent];
 		if (path != NULL && bid &&
-			([nspath hasPrefix:@"/usr/lib/tweaks"] || [nspath hasPrefix:@"/Library/MobileSubstrate/DynamicLibraries"]) &&
+			([nspath containsString:@"TweakInject"] || [nspath hasPrefix:@"/Library/MobileSubstrate/DynamicLibraries"]) &&
 			[tweak hasSuffix:@".dylib"])
 		{
 			if (globalBlacklist && bid) {
