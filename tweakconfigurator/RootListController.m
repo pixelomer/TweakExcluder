@@ -14,7 +14,7 @@
 	if (!_specifiers) {
 		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
 		// Hardcoded count because if something is modified, things can go wrong
-		if (!_specifiers || [_specifiers count] != 9) {
+		if (!_specifiers || [_specifiers count] != 8) {
 			_specifiers = [[self loadSpecifiersFromPlistName:@"Error" target:self] retain];
 		}
 		else {
