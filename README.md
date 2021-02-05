@@ -2,7 +2,7 @@
 
 ## History
 
-This is a poorly-made tweak which made it possible to enable/disable certain tweaks for certain apps. It is poorly made because instead of using a single preference file, it uses tons of preference files for each app. These files also don't use the correct naming convention.
+This is a poorly-made tweak which made it possible to enable/disable certain tweaks for certain apps. It is poorly made because instead of using a single preference file, it uses tons of preference files for each app. These files also don't use the correct naming convention. It also uses `NSDictionary` functions to load preference files rather than just using `NSUserDefaults` which is the correct class to use.
 
 ## Original Description
 
