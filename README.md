@@ -1,5 +1,11 @@
 # TweakConfigurator
 
+## History
+
+This is a poorly-made tweak which made it possible to enable/disable certain tweaks for certain apps. It is poorly made because instead of using a single preference file, it uses tons of preference files for each app. These files also don't use the correct naming convention.
+
+## Original Description
+
 This is a tweak that lets you configure the injection process of tweaks. The settings for the tweak can be found in the Preferences app.  
 **Warning:** Do not attempt to install this tweak on a device running anything lower than iOS 11, it will cause a respring loop!
 
